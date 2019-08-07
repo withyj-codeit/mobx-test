@@ -1,6 +1,7 @@
 import { inject, observer } from 'mobx-react'
 import * as React from 'react';
-import CheckAuthState from '../../CheckAuthState'
+// import CheckAuthState from '../../CheckAuthState'
+import Link from 'next/Link'
 
 interface Props {
   userStore?: any
@@ -21,29 +22,36 @@ interface Props {
 //   }>
 // }
 
-const Navbar: React.FC<Props> = (props) => {
-  const { userStore } = props
-  console.log(userStore)
+const Navbar: React.FC<Props> = (props:any) => {
+  const { authStore } = props
+  console.log("Navbar: ", authStore)
   return (
     <div className="navbar-wrapper">
       Navbar
       <br/>
-      <button>회원가입</button>
-      <button onClick={() => userStore.applyUserState()}>로그인</button>
+      <Link href='/'>
+        <a>Main index 로 이동</a>
+      </Link> | |
+      <Link href='/login'>
+        <a>Login으로 이동</a>
+      </Link> | |
+      <Link href='/home'>
+        <a>Home으로 이동</a>
+      </Link>
       <br/>
-      <CheckAuthState
+      {/* { authStore } */}
+      {/* <CheckAuthState
         pending={<div>대기중</div>}
         member={<div>맴버입니다.</div>}
         payedMember={<div>유료회원입니다.</div>}
       >
         children 자리입니다.
-      </CheckAuthState>
+      </CheckAuthState> */}
       <br/>
-      {userStore.userState}
       <br/>
       <br/>- - - - - - - - - - - - - - -
     </div>
   )
 }
 
-export default inject("userStore")(observer(Navbar));
+export default inject("authStore")(observer(Navbar));

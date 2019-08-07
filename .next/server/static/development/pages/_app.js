@@ -1376,18 +1376,28 @@ function (_App) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // console.log("cookie info: ", appContext.ctx.req.headers.cookie)
+                // function getCookie(cookiename) {
+                //   // Get name followed by anything except a semicolon
+                //   const cookiestring=RegExp(""+cookiename+"[^;]+").exec(appContext.ctx.req.headers.cookie);
+                //   // Return everything after the equal sign, or an empty string if the cookie name not found
+                //   return decodeURIComponent(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
+                // }
+                // const cookieValue = getCookie('jwt');
+                // console.log("jwt value: ", cookieValue)
                 mobxStore = Object(_src_stores_UtilStore__WEBPACK_IMPORTED_MODULE_12__["initializeStore"])();
+                console.log("mobxStore: ", mobxStore);
                 appContext.ctx.mobxStore = mobxStore;
-                _context.next = 4;
+                _context.next = 5;
                 return next_app__WEBPACK_IMPORTED_MODULE_9___default.a.getInitialProps(appContext);
 
-              case 4:
+              case 5:
                 appProps = _context.sent;
                 return _context.abrupt("return", Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, appProps, {
                   initialMobxState: mobxStore
                 }));
 
-              case 6:
+              case 7:
               case "end":
                 return _context.stop();
             }
@@ -1410,6 +1420,7 @@ function (_App) {
 
     _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(MyApp).call(this, props));
     _this.mobxStore = void 0;
+    console.log("in _app constructor ", props.initialMobxState.authStore);
     var isServer = "undefined" === 'undefined';
     _this.mobxStore = isServer ? props.initialMobxState : Object(_src_stores_UtilStore__WEBPACK_IMPORTED_MODULE_12__["initializeStore"])(props.initialMobxState);
     return _this;
@@ -1470,6 +1481,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Footer */ "./src/components/layouts/Footer.tsx");
+/* harmony import */ var _Navbar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Navbar */ "./src/components/layouts/Navbar.tsx");
 
 
 
@@ -1477,7 +1489,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // import Header from './Header'
-// import Navbar from './Navbar'
+
+
 
 var Layout =
 /*#__PURE__*/
@@ -1496,7 +1509,7 @@ function (_React$Component) {
       var children = this.props.children;
       return react__WEBPACK_IMPORTED_MODULE_5__["createElement"]("div", {
         className: "layout"
-      }, "navbar \uC790\uB9AC", children, react__WEBPACK_IMPORTED_MODULE_5__["createElement"](_Footer__WEBPACK_IMPORTED_MODULE_6__["default"], null));
+      }, "navbar \uC790\uB9AC", react__WEBPACK_IMPORTED_MODULE_5__["createElement"](_Navbar__WEBPACK_IMPORTED_MODULE_7__["default"], null), children, react__WEBPACK_IMPORTED_MODULE_5__["createElement"](_Footer__WEBPACK_IMPORTED_MODULE_6__["default"], null));
     }
   }]);
 
@@ -1504,6 +1517,56 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Layout);
+
+/***/ }),
+
+/***/ "./src/components/layouts/Navbar.tsx":
+/*!*******************************************!*\
+  !*** ./src/components/layouts/Navbar.tsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mobx-react */ "mobx-react");
+/* harmony import */ var mobx_react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mobx_react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/Link */ "next/Link");
+/* harmony import */ var next_Link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_Link__WEBPACK_IMPORTED_MODULE_2__);
+
+ // import CheckAuthState from '../../CheckAuthState'
+
+
+
+// interface NFC<Props> extends React.FC<Props> {
+//   getInitialProps?: ({req}: { req: any; }) => {
+//   }
+// }
+// interface NFC<Props> extends React.FC<Props> {
+//   getInitialProps?: ({req}: { req: any; }) => Promise<{
+//     isLoading: boolean;
+//     hasErrored: boolean; speakers: any; isServer: boolean;
+//   } | {
+//     speakers: never[]; hasErrored: boolean; isServer: boolean; errorMessage: any;
+//   }>
+// }
+var Navbar = function Navbar(props) {
+  var authStore = props.authStore;
+  console.log("Navbar: ", authStore);
+  return react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", {
+    className: "navbar-wrapper"
+  }, "Navbar", react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", null), react__WEBPACK_IMPORTED_MODULE_1__["createElement"](next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/"
+  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("a", null, "Main index \uB85C \uC774\uB3D9")), " | |", react__WEBPACK_IMPORTED_MODULE_1__["createElement"](next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/login"
+  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("a", null, "Login\uC73C\uB85C \uC774\uB3D9")), " | |", react__WEBPACK_IMPORTED_MODULE_1__["createElement"](next_Link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: "/home"
+  }, react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("a", null, "Home\uC73C\uB85C \uC774\uB3D9")), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", null), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", null), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", null), react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("br", null), "- - - - - - - - - - - - - - -");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(mobx_react__WEBPACK_IMPORTED_MODULE_0__["inject"])("authStore")(Object(mobx_react__WEBPACK_IMPORTED_MODULE_0__["observer"])(Navbar)));
 
 /***/ }),
 
@@ -1547,10 +1610,8 @@ var _class, _descriptor, _descriptor2, _descriptor3, _descriptor4, _temp;
 var AuthStore = (_class = (_temp =
 /*#__PURE__*/
 function () {
-  function AuthStore() {
+  function AuthStore(initialData) {
     var _this = this;
-
-    var initialData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_4__["default"])(this, AuthStore);
 
@@ -1562,16 +1623,88 @@ function () {
 
     Object(_babel_runtime_corejs2_helpers_esm_initializerDefineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(this, "userData", _descriptor4, this);
 
-    this.userData.email = initialData.email;
-    this.userData.username = initialData.username;
-    Object(mobx__WEBPACK_IMPORTED_MODULE_8__["reaction"])(function () {
-      return _this.token;
-    }, function (token) {
-      document.cookie = "jwt=".concat(token, ";httponly;secure");
-    });
+    this.fetch =
+    /*#__PURE__*/
+    function () {
+      var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+      /*#__PURE__*/
+      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee(token) {
+        var response, result;
+        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_9___default()({
+                  method: 'get',
+                  url: 'http://localhost:8000/api/auth/check',
+                  headers: {
+                    'jwt': token
+                  },
+                  withCredentials: true
+                });
+
+              case 2:
+                response = _context.sent;
+                result = response.data.info;
+                console.log("result", result);
+
+                _this.setUserData(result);
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      return function (_x) {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    this.fetch2 =
+    /*#__PURE__*/
+    Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+    /*#__PURE__*/
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee2() {
+      var response, result;
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_9___default()({
+                method: 'get',
+                url: 'http://localhost:8000/api/auth/check',
+                // headers: {'jwt':token},
+                withCredentials: true
+              });
+
+            case 2:
+              response = _context2.sent;
+              result = response.data.info;
+              console.log("result", result);
+
+              _this.setUserData(result);
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+    this.userData = initialData.userData; // this.fetch(token)
   }
 
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_5__["default"])(AuthStore, [{
+    key: "setToken",
+    value: function setToken(token) {
+      this.token = token;
+    }
+  }, {
     key: "setEmail",
     value: function setEmail(email) {
       this.authData.email = email;
@@ -1591,15 +1724,13 @@ function () {
     value: function () {
       var _login = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
       /*#__PURE__*/
-      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee() {
-        var _this2 = this;
-
+      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee3() {
         var response;
-        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
+        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context.next = 2;
+                _context3.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_9___default()({
                   method: 'post',
                   url: 'http://localhost:8000/api/auth/login',
@@ -1610,17 +1741,18 @@ function () {
                 });
 
               case 2:
-                response = _context.sent;
+                response = _context3.sent;
                 Object(mobx__WEBPACK_IMPORTED_MODULE_8__["runInAction"])(function () {
-                  _this2.token = response.data.token;
+                  document.cookie = "jwt=".concat(response.data.token);
                 });
+                console.log("token in AuthStore: ", this.token);
 
-              case 4:
+              case 5:
               case "end":
-                return _context.stop();
+                return _context3.stop();
             }
           }
-        }, _callee, this);
+        }, _callee3, this);
       }));
 
       function login() {
@@ -1630,45 +1762,6 @@ function () {
       return login;
     }() // 쿠키 속 jwt로 자동 로그인 하는 로직
 
-  }, {
-    key: "fetch",
-    value: function () {
-      var _fetch = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-      /*#__PURE__*/
-      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee2(token) {
-        var response, result;
-        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_9___default()({
-                  method: 'get',
-                  url: 'http://localhost:8000/api/auth/check',
-                  headers: {
-                    'jwt': token
-                  }
-                });
-
-              case 2:
-                response = _context2.sent;
-                result = response.data.info;
-                this.setUserData(result);
-
-              case 5:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function fetch(_x) {
-        return _fetch.apply(this, arguments);
-      }
-
-      return fetch;
-    }()
   }, {
     key: "setUserData",
     value: function setUserData(userData) {
@@ -1715,7 +1808,7 @@ function () {
   enumerable: true,
   writable: true,
   initializer: function initializer() {
-    return '';
+    return "기본값";
   }
 }), _descriptor2 = Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "inProgress", [mobx__WEBPACK_IMPORTED_MODULE_8__["observable"]], {
   configurable: true,
@@ -1746,7 +1839,7 @@ function () {
       userState: ''
     };
   }
-}), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "setEmail", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "setEmail"), _class.prototype), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "setPassword", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "setPassword"), _class.prototype), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "setUsername", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "setUsername"), _class.prototype), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "login", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "login"), _class.prototype), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "setUserData", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "setUserData"), _class.prototype)), _class);
+}), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "setToken", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "setToken"), _class.prototype), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "setEmail", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "setEmail"), _class.prototype), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "setPassword", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "setPassword"), _class.prototype), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "setUsername", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "setUsername"), _class.prototype), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "login", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "login"), _class.prototype), Object(_babel_runtime_corejs2_helpers_esm_applyDecoratedDescriptor__WEBPACK_IMPORTED_MODULE_6__["default"])(_class.prototype, "setUserData", [mobx__WEBPACK_IMPORTED_MODULE_8__["action"]], _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(_class.prototype, "setUserData"), _class.prototype)), _class);
 
 
 /***/ }),
@@ -1774,8 +1867,15 @@ var stores = null;
 
 function initializeStore() {
   var initialData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    authStore: {}
+    authStore: {
+      userData: {
+        email: '',
+        username: '',
+        userState: ''
+      }
+    }
   };
+  console.log("token in UtilStore: ", initialData);
 
   if (isServer) {
     return {
@@ -2014,6 +2114,17 @@ module.exports = require("next-server/dist/lib/router/router");
 /***/ (function(module, exports) {
 
 module.exports = require("next-server/dist/lib/utils");
+
+/***/ }),
+
+/***/ "next/Link":
+/*!****************************!*\
+  !*** external "next/Link" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/Link");
 
 /***/ }),
 

@@ -8,21 +8,27 @@ useStaticRendering(isServer);
 
 let stores:any = null;
 
-function initializeStore(
-  initialData = {
-    authStore: {}
-  }) {
-    if (isServer) {
-      return {
-        authStore: new AuthStore(initialData.authStore)
-      };
+function initializeStore(initialData:any = {
+  authStore: {
+    userData : {
+      email: '',
+      username: '',
+      userState: ''
     }
-    if (stores === null) {
-      stores = {
-        authStore: new AuthStore(initialData.authStore)
-      };
-    }
-    return stores
   }
+}) {
+  console.log("token in UtilStore: ", initialData)
+  if (isServer) {
+    return {
+      authStore: new AuthStore(initialData.authStore)
+    };
+  }
+  if (stores === null) {
+    stores = {
+      authStore: new AuthStore(initialData.authStore)
+    };
+  }
+  return stores
+}
 
 export {initializeStore}

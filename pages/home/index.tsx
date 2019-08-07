@@ -3,7 +3,7 @@ import * as React from 'react';
 
 const HomePage: React.FC = () => {
   return (
-    <div>hi~!</div>
+    <div><br/><br/><br/>/home 페이지 입니다.<br/><br/><br/></div>
   )
 }
 

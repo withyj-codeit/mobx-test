@@ -1,25 +1,30 @@
 // login/index.tsx
 import * as React from 'react';
-import { inject, observer } from 'mobx-react';
+// import { inject, observer } from 'mobx-react';
 import LoginTemplate from '../../src/components/LoginTemplate'
+import nextCookie from 'next-cookies'
 // import { AuthStore } from '../../src/stores/AuthStore';
 // interface Props {
 //   authStore?: any
 // }
 
-const LoginPage = () => {
+const LoginPage = (props:any) => {
 
   return (
     <div>
+      <h1>login index page: {props.authStore.userData.email}</h1>
       <LoginTemplate />
     </div>
   )
 }
 
-LoginPage.getInitialProps = async ({ mobxStore }) => {
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDM2YWQ2NmE5YjI1Njg3NDFhYmY4ODciLCJlbWFpbCI6IndpdGh5akBjb2RlaXQua3IiLCJ1c2VybmFtZSI6Im1hc3RlciIsImFkbWluIjp0cnVlLCJpYXQiOjE1NjQwMjIwMzksImV4cCI6MTU2NDYyNjgzOSwiaXNzIjoiY29kZWl0LmtyIiwic3ViIjoidXNlckluZm8ifQ.RbOQaDH_wNsIt3BAydK2xQqvshMQMNDdzI1qmwgDM20'
-  await mobxStore.authStore.fetch(token)
-  return { authStore: mobxStore.authStore }
+LoginPage.getInitialProps = async (ctx:any) => {
+  const isServer = typeof window == 'undefined'
+  if (isServer) {
+    const { jwt } = nextCookie(ctx)
+    await ctx.mobxStore.authStore.fetch(jwt)
+  }
+  return { authStore: ctx.mobxStore.authStore }
 }
 
-export default inject('authStore')(observer(LoginPage))
+export default LoginPage

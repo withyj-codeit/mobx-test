@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Footer from './Footer'
 // import Header from './Header'
-// import Navbar from './Navbar'
+import Navbar from './Navbar'
 
 class Layout extends React.Component {
   render () {
@@ -9,7 +9,7 @@ class Layout extends React.Component {
     return (
       <div className='layout'>
         navbar 자리
-        {/* <Navbar/> */}
+        <Navbar/>
         {children}
         <Footer/>
       </div>

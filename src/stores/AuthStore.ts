@@ -1,8 +1,8 @@
-import { observable, action, runInAction, reaction } from 'mobx';
+import { observable, action, runInAction } from 'mobx';
 import axios from 'axios'
 
 class AuthStore {
-  @observable private token = '';
+  @observable private token = "기본값";
   @observable inProgress: Boolean = false;
   @observable authData = {
     email: '',
@@ -15,17 +15,12 @@ class AuthStore {
     userState: ''
   }
 
-  constructor(initialData:any = {}) {
-    this.userData.email = initialData.email;
-    this.userData.username = initialData.username;
-
-    reaction(
-      () => this.token,
-      token => {
-        document.cookie = `jwt=${token};httponly;secure`
-      }
-    )
+  constructor(initialData:any) {
+    this.userData = initialData.userData
+    // this.fetch(token)
   }
+
+  @action setToken(token) { this.token = token }
 
   @action setEmail(email) { this.authData.email = email }
   @action setPassword(password) { this.authData.password = password }
@@ -42,18 +37,33 @@ class AuthStore {
     })
 
     runInAction(() => {
-      this.token = response.data.token
+      document.cookie = `jwt=${response.data.token}`
     })
+    console.log("token in AuthStore: ", this.token)
   }
 
   // 쿠키 속 jwt로 자동 로그인 하는 로직
-  async fetch(token) {
+  fetch = async (token) => {
     const response = await axios({
       method: 'get',
       url: 'http://localhost:8000/api/auth/check',
-      headers: {'jwt': token}
+      headers: {'jwt':token},
+      withCredentials: true
     })
     const result = response.data.info
+    console.log("result", result)
+    this.setUserData(result);
+  }
+
+  fetch2 = async () => {
+    const response = await axios({
+      method: 'get',
+      url: 'http://localhost:8000/api/auth/check',
+      // headers: {'jwt':token},
+      withCredentials: true
+    })
+    const result = response.data.info
+    console.log("result", result)
     this.setUserData(result);
   }
 
